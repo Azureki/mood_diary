@@ -1,0 +1,40 @@
+<!-- login.html -->
+<!-- should extend base template-->
+<!-- should implement title block-->
+<!-- should implement content block-->
+<!-- should display the message with respective message level-->
+<!-- should display a one-column title area, which should display the title Please login-->
+<!-- if already login, should display the user's diary at most 3 diaries per row -->
+<!-- should display the login form-->
+{% extends "loginbase.html" %}
+{% block title %}Login{% endblock %}
+{% block details %}
+{% load staticfiles %}
+<div class="container" align="center"
+     style='width:1920px;height:830px;background:url({% static "tmp/background.jpg" %});'>
+    {% if not username %}
+    <div class="container"
+    style='margin-top:200px;margin-left:700px;'>
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div style="font-size:20px" class='panel-heading' align=center>登&nbsp;&nbsp;录</div>
+                <div
+                 class='panel-body'>
+                    <form name='productinfo' action='/login/' method='POST'>
+                        {% csrf_token %}
+                        {{ loginform.as_p }}
+                        <input class="btn btn-primary btn-lg btn-block" name="_save" type="submit" style="margin-left:0px" value="登&nbsp;&nbsp;录">
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    <div class='container'>
+        {% for message in messages %}
+        <div class='alert alert-{{message.tags}}' align="center" style="font-size:20px;width:300px">{{ message }}</div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

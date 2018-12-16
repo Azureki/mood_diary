@@ -1,0 +1,39 @@
+<!-- index.html  -->
+<!-- should extend base template-->
+<!-- should implement title block-->
+<!-- should implement content block-->
+<!-- should display the message with respective message level-->
+<!-- should display a one-column title area, which should display the title XXX's diary-->
+<!-- if already login, should display the user's diary at most 3 diaries per row -->
+<!-- should use bootstrap panel to show the details of each diary, which include the date, text, extra informations-->
+<!-- if not diary yet, display a message-->
+{% extends "loginbase.html" %}
+{% load staticfiles %}
+{% block title %}Home{% endblock %}
+{% block details %}
+<div class='container'
+     style='width:1920px;height:830px;background:url({% static "tmp/background.jpg" %});'>
+    <div class='container' align="center">
+    {% for message in messages %}
+    <div class='alert alert-{{message.tags}}' align="center" style="font-size:20px;width:300px">{{ message }}</div>
+    {% endfor %}
+    </div>
+    <div class="container">
+    {% for diary in diaries %}
+    {% cycle "<div class='row'>" "" "" %}
+    <div class='col-md-4'>
+        <div class="panel panel-success">
+            <div class='panel-heading' align=center>{{diary.date}}</div>
+            <div style="width:350px;
+                        height:100px;
+                        overflow:scroll;
+                        overflow-x:hidden;
+                        overflow-y:auto"
+                 class='panel-body'>{{diary.note|linebreaks}}</div>
+            <div class='panel-footer'>今日花费：{{diary.budget}}元,体重：{{diary.weight}}公斤</div>
+        </div>
+    </div>
+    {% cycle "" "" "</div>" %}
+        {% endfor %}</div></div>
+</div>
+{% endblock %}

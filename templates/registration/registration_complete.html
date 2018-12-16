@@ -1,0 +1,21 @@
+<!-- registration_complete.html -->
+<!-- Should extend a base template -->
+<!-- Should implement the title block -->
+<!-- Should implement content block which display the message with respective message level style-->
+<!-- Should show a registration success reminder text, it will be good to user bootstrap panel-->
+{% extends "loginbase.html" %}
+{% block title %}Registion{% endblock %}
+{% block details %}
+{% load staticfiles %}
+<div class='container' style='width:1920px;height:830px;background:url({% static "tmp/background.jpg" %});'>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading" align="center">
+                    <h3>Your registration is successful ! </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

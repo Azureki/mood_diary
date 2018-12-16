@@ -1,0 +1,36 @@
+{% extends "loginbase.html" %}
+{% block title %}diary{% endblock %}
+{% block details %}
+{% load staticfiles %}
+<div class="container"
+    style='width:1920px;height:830px;background:url({% static "tmp/background.jpg" %});'>
+
+    {% if not messages %}
+    <div class="container"
+    style='margin-top:200px;margin-left:600px'>
+        <div class="col-md-6">
+            <div class="panel panel-info">
+                <div style="font-size:20px" class='panel-heading' align=center>写日记</div>
+                <div
+                 class='panel-body' align="center">
+                    <form name='posting' action='/post/' method="post">
+                        {% csrf_token %}
+                        <table>{{ new_diary.as_table }}</table></br>
+                        <input class="btn btn-info btn-lg btn-block" style="margin-left:0px;" type="submit" value="保存" name="_save" />
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    {% endif %}
+    <div class='container' align="center">
+    {% for message in messages %}
+    <div class='alert alert-{{message.tags}}' align="center" style="font-size:20px;width:300px">{{ message }}</div>
+    {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}
+
